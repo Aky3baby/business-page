@@ -1,39 +1,42 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const dropdown = document.querySelector('.dropdown');
-    dropdown.addEventListener('click', function () {
-        this.classList.toggle('active');
-    });
-});
-document.querySelector('.dropbtn').addEventListener('click', function() {
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === 'block') {
-        dropdownContent.style.display = 'none';
-    } else {
-        dropdownContent.style.display = 'block';
-    }
-});// Progress bar animation
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
-    const progressBars = document.querySelectorAll('.progress-bar');
-    
-    const animateProgress = (bar) => {
-        const targetWidth = bar.getAttribute('data-width');
-        bar.style.width = targetWidth + '%';
-    };
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('nav ul');
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  
+  // Toggle mobile menu
+  hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      nav.classList.toggle('active');
+  });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateProgress(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
+  // Toggle dropdown on mobile
+  dropdownToggle.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.parentElement.classList.toggle('active');
+      }
+  });
 
-    progressBars.forEach(bar => {
-        observer.observe(bar);
-    });
-});
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768 && 
+          !e.target.closest('nav') && 
+          !e.target.closest('.hamburger')) {
+          hamburger.classList.remove('active');
+          nav.classList.remove('active');
+      }
+  });
 
-AOS.init({
-  duration: 1000,
-  once: true
+  // Close menu on link click
+  document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+              hamburger.classList.remove('active');
+              nav.classList.remove('active');
+          }
+      });
+  });
 });
