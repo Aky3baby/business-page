@@ -170,103 +170,111 @@ nav ul li a:hover {
         margin: 10px 0;
         /* Add spacing between stacked nav items */
     }
-}
-.hamburger {
+}.hamburger {
     display: none;
     cursor: pointer;
-    background: none;
-    border: none;
-    padding: 10px;
-    z-index: 1000;
-    position: relative;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    background: #f8f9fa;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+    background: #f01426;
+    transform: translateY(-50%) scale(1.1);
 }
 
 .hamburger i {
     font-size: 1.8rem;
-    color: #2d3748;
-    transition: color 0.3s ease;
+    color: #2f1be4;
+    transition: all 0.3s ease;
 }
 
-/* Mobile Menu Styles */
+.hamburger.active i {
+    color: #007bff;
+    transform: rotate(180deg);
+}
+
+/* Animated X Icon */
+.hamburger .fa-bars {
+    transition: transform 0.3s ease;
+}
+
+.hamburger.active .fa-bars {
+    transform: rotate(180deg);
+}
+
+.hamburger .fa-times {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(-180deg);
+    transition: all 0.3s ease;
+}
+
+.hamburger.active .fa-times {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Mobile Menu Animation */
+nav ul {
+    /* Existing styles */
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+nav ul.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Enhanced Dropdown Styling */
+.dropdown-menu li {
+    padding: 0.5rem 0;
+}
+
+.dropdown-menu a {
+    color: #495057;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    color: #007bff;
+    padding-left: 1.5rem;
+}
+
 @media (max-width: 768px) {
     .hamburger {
-        display: block;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+        display: flex; /* Show only on mobile */
     }
 
     nav ul {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 70%;
-        max-width: 300px;
-        background: #ffffff;
-        flex-direction: column;
-        padding: 4rem 1.5rem;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        transition: right 0.3s ease;
-        z-index: 999;
-    }
-
-    nav ul.active {
-        right: 0;
+        padding: 1rem 0;
     }
 
     nav ul li {
-        width: 100%;
         margin: 0.5rem 0;
     }
 
-    nav ul li a {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-    }
-
     .dropdown-menu {
-        position: static;
-        display: none;
-        padding-left: 1.5rem;
-        box-shadow: none;
-    }
-
-    .dropdown.active .dropdown-menu {
-        display: block;
-    }
-
-    .fa-caret-down {
-        margin-left: auto;
-        transition: transform 0.3s ease;
-    }
-
-    .dropdown.active .fa-caret-down {
-        transform: rotate(180deg);
+        padding-left: 2rem;
+        margin-top: 0.5rem;
+        background: #f8f9fa;
+        border-left: 3px solid #007bff;
     }
 }
-
-/* Hamburger Animation */
-.hamburger.active i.fa-bars {
-    display: none;
-}
-
-.hamburger.active i.fa-times {
-    display: block;
-}
-
-.hamburger i.fa-times {
-    display: none;
-}
-
-
-
-
-
-
-
 
 
 
